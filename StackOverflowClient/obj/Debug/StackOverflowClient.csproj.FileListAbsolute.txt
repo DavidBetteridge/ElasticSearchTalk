@@ -1,0 +1,10 @@
+C:\Code\Elastic Search Talk\StackOverflowClient\bin\Debug\StackOverflowClient.exe.config
+C:\Code\Elastic Search Talk\StackOverflowClient\bin\Debug\StackOverflowClient.exe
+C:\Code\Elastic Search Talk\StackOverflowClient\bin\Debug\StackOverflowClient.pdb
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.csprojResolveAssemblyReference.cache
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.Form1.resources
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.Properties.Resources.resources
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.csproj.GenerateResource.Cache
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.csproj.CoreCompileInputs.cache
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.exe
+C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.pdb
