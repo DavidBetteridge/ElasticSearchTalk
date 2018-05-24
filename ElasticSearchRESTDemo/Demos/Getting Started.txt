@@ -1,0 +1,38 @@
+﻿Add Document
+PUT /meetups/dotnetyork/june2018
+{
+	"title": "Double Bill - Elasticsearch and JavaScript Performance",
+	"speakers":  "David Betteridge and Benjamin Howarth",
+	"date":  "Friday, June 1, 2018"
+}
+
+Get Document
+GET /meetups/dotnetyork/june2018
+
+Add Another Document
+PUT /meetups/dotnetyork/july2018
+{
+	"title": "Why F# is better than C#",
+	"speakers":  "David Betteridge",
+	"date":  "Friday, July 1, 2018"
+}
+
+Get 2nd Document
+GET /meetups/dotnetyork/july2018
+
+Delete Document
+DELETE /meetups/dotnetyork/july2018
+
+Different Meetup
+PUT /meetups/yorkcodedojo/june2018
+{
+	"title": "Bit Coin Mining",
+	"date":  "Wednesday, June 13, 2018"
+}
+
+Different Meetup (different index)
+PUT /dojo_meetups/yorkcodedojo/june2018
+{
+	"title": "Bit Coin Mining",
+	"date":  "Wednesday, June 13, 2018"
+}

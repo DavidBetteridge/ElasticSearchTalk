@@ -39,12 +39,12 @@
             this.txtURL = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTimeTaken = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,17 +61,19 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.BackColor = System.Drawing.Color.LightBlue;
+            this.lblTitle.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(0, 24);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(1255, 58);
+            this.lblTitle.Size = new System.Drawing.Size(1255, 45);
             this.lblTitle.TabIndex = 12;
             this.lblTitle.Text = "Demo Title Goes Here";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.cmdExecute);
             this.panel1.Controls.Add(this.txtCommand);
             this.panel1.Controls.Add(this.label3);
@@ -80,15 +82,15 @@
             this.panel1.Controls.Add(this.txtURL);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Location = new System.Drawing.Point(0, 69);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(636, 650);
+            this.panel1.Size = new System.Drawing.Size(636, 663);
             this.panel1.TabIndex = 13;
             // 
             // cmdExecute
             // 
             this.cmdExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExecute.Location = new System.Drawing.Point(457, 597);
+            this.cmdExecute.Location = new System.Drawing.Point(457, 610);
             this.cmdExecute.Name = "cmdExecute";
             this.cmdExecute.Size = new System.Drawing.Size(161, 31);
             this.cmdExecute.TabIndex = 10;
@@ -104,7 +106,8 @@
             this.txtCommand.Location = new System.Drawing.Point(17, 136);
             this.txtCommand.Multiline = true;
             this.txtCommand.Name = "txtCommand";
-            this.txtCommand.Size = new System.Drawing.Size(601, 458);
+            this.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtCommand.Size = new System.Drawing.Size(601, 471);
             this.txtCommand.TabIndex = 9;
             // 
             // label3
@@ -161,21 +164,33 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.lblTimeTaken);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtResult);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(636, 82);
+            this.panel2.Location = new System.Drawing.Point(636, 69);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(619, 650);
+            this.panel2.Size = new System.Drawing.Size(619, 663);
             this.panel2.TabIndex = 14;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::ElasticSearchRESTDemo.Properties.Resources.elastic;
+            this.pictureBox1.Location = new System.Drawing.Point(339, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(264, 89);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // lblTimeTaken
             // 
             this.lblTimeTaken.AutoSize = true;
-            this.lblTimeTaken.Location = new System.Drawing.Point(119, 24);
+            this.lblTimeTaken.Location = new System.Drawing.Point(119, 60);
             this.lblTimeTaken.Name = "lblTimeTaken";
             this.lblTimeTaken.Size = new System.Drawing.Size(30, 25);
             this.lblTimeTaken.TabIndex = 15;
@@ -184,7 +199,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 24);
+            this.label5.Location = new System.Drawing.Point(13, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 25);
             this.label5.TabIndex = 14;
@@ -207,28 +222,18 @@
             this.txtResult.Location = new System.Drawing.Point(18, 136);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(585, 458);
+            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtResult.Size = new System.Drawing.Size(585, 471);
             this.txtResult.TabIndex = 12;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.LightBlue;
-            this.splitter1.Location = new System.Drawing.Point(636, 82);
+            this.splitter1.Location = new System.Drawing.Point(636, 69);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 650);
+            this.splitter1.Size = new System.Drawing.Size(3, 663);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::ElasticSearchRESTDemo.Properties.Resources.elastic;
-            this.pictureBox1.Location = new System.Drawing.Point(339, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(264, 89);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 

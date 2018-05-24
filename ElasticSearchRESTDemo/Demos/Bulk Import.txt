@@ -1,0 +1,6 @@
+﻿Load 2 Documents
+POST /_bulk
+{ "create": { "_index": "meetups", "_type": "dotnetyork", "_id": "oct2017" }}
+{ "title": "Building APIs with Azure Functions", "speakers":"Kevin Smith", "date":"5th Oct 2017" }
+{ "create": { "_index": "meetups", "_type": "dotnetyork", "_id": "nov2017" }}
+{ "title": "Real-world .NET Core (now with more 2.0!)", "speakers":"Keith Williams", "date":"2nd Nov 2017" }
