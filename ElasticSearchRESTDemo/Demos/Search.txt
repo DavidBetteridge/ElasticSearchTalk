@@ -29,7 +29,7 @@ POST /meetups/_search
 }
 
 View Mapping (keyword)
-GET  /meetups/_mapping
+GET /meetups/_mapping
 
 Term Search (fixed)
 POST /meetups/_search

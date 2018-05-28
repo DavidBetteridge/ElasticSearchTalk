@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +13,7 @@ namespace LoadStackOverflowData
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:9200");
@@ -30,25 +31,40 @@ namespace LoadStackOverflowData
 
             using (var cn = new SqlConnection(cs))
             {
-                await cn.OpenAsync();
+                cn.Open();
 
                 using (var cmd = new SqlCommand())
                 {
                     cmd.Connection = cn;
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandTimeout = 0;
-                    cmd.CommandText = $@"SELECT Id, Body, IsNull(Title,'') as Title
-                                          FROM dbo.Posts";
+                    cmd.CommandText = $@"SELECT 
+                                                P.Id, 
+                                                [AnswerCount], 
+                                                IsNull([Body],'') as Body, 
+                                                [ClosedDate], 
+                                                [CommentCount], 
+                                                [CommunityOwnedDate], P.[CreationDate], 
+	                                            [FavoriteCount], [LastActivityDate], [LastEditDate], 
+                                                [LastEditorDisplayName], [LastEditorUserId], U.DisplayName AS OwnerDisplayName, 
+	                                            PT.[Type] as PostType, 
+                                                [Score], 
+                                                [Tags], 
+                                                IsNull([Title],'') as Title,
+                                                [ViewCount]
+                                      FROM Posts P
+                                      JOIN [dbo].[PostTypes] PT ON PT.Id = P.PostTypeId
+                                      JOIN [dbo].[Users] U ON U.Id = P.OwnerUserId";
 
 
-                    using (var dr = await cmd.ExecuteReaderAsync())
+                    using (var dr = cmd.ExecuteReader())
                     {
                         var totalLoaded = 0;
                         var posts = new List<Post>();
                         var sw = new Stopwatch();
                         sw.Start();
 
-                        while (await dr.ReadAsync())
+                        while (dr.Read())
                         {
                             totalLoaded++;
                             posts.Add(new Post()
@@ -56,10 +72,24 @@ namespace LoadStackOverflowData
                                 ID = (int)dr["Id"],
                                 Body = (string)dr["Body"],
                                 Title = (string)dr["Title"],
+                                AnswerCount = (int)dr["AnswerCount"],
+                                CommentCount = (int)dr["CommentCount"],
+                                FavoriteCount = (int)dr["FavoriteCount"],
+                                ViewCount = (int)dr["ViewCount"],
+                                ClosedDate = dr["ClosedDate"] as DateTime?,
+                                CommunityOwnedDate = dr["CommunityOwnedDate"] as DateTime?,
+                                CreationDate = dr["CreationDate"] as DateTime?,
+                                LastActivityDate = dr["LastActivityDate"] as DateTime?,
+                                LastEditDate = dr["LastEditDate"] as DateTime?,
+                                LastEditorDisplayName = dr["LastEditorDisplayName"] as string,
+                                OwnerDisplayName = dr["OwnerDisplayName"] as string,
+                                PostType = dr["PostType"] as string,
+                                Score = (int)dr["Score"] ,
+                                Tags = dr["Tags"] as string
                             });
 
 
-                            if (posts.Count == 1000)
+                            if (posts.Count == 10000)
                             {
                                 sw.Stop();
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -67,7 +97,7 @@ namespace LoadStackOverflowData
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.Write("  Time to fetch :" + Math.Round(sw.Elapsed.TotalSeconds, 2) + "s");
                                 sw.Restart();
-                                await LoadPosts(posts, client);
+                                LoadPosts(posts, client);
                                 sw.Stop();
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("  Time to load:" + Math.Round(sw.Elapsed.TotalSeconds, 2) + "s");
@@ -76,25 +106,28 @@ namespace LoadStackOverflowData
                             }
                         }
 
-                        await LoadPosts(posts, client);
+                        LoadPosts(posts, client);
                     }
 
                 }
             }
         }
 
-        private static async Task LoadPosts(List<Post> posts, HttpClient client)
+        private static void LoadPosts(List<Post> posts, HttpClient client)
         {
             var sb = new StringBuilder();
             foreach (var post in posts)
             {
                 sb.AppendLine(@"{ ""create"": { ""_index"": ""stackoverflow"", ""_type"": ""post"", ""_id"": """ + post.ID + @""" }}");
-                sb.AppendLine(@" {""body"":""" + CleanForJSON(post.Body) + @""",  ""title"":""" + CleanForJSON(post.Title) + @"""} ");
+
+                var payload = JsonConvert.SerializeObject(post);
+                sb.AppendLine(payload);
+                //sb.AppendLine(@" {""body"":""" + CleanForJSON(post.Body) + @""",  ""title"":""" + CleanForJSON(post.Title) + @"""} ");
             }
 
             var content = new StringContent(sb.ToString(), Encoding.UTF8, "application/json");
-            var result = await client.PostAsync("/_bulk", content);
-            var what = await result.Content.ReadAsStringAsync();
+            var result = client.PostAsync("/_bulk", content).Result;
+            var what = result.Content.ReadAsStringAsync().Result;
         }
 
         public static string CleanForJSON(string s)
