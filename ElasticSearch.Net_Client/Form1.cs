@@ -34,7 +34,7 @@ namespace ElasticSearch.Net_Client
                 {
                     match = new
                     {
-                        body = new { query = "unicorn" }
+                        Body = new { query = "unicorn" }
                     }
                 }
             }));

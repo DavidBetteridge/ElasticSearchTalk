@@ -2,28 +2,28 @@
 
 namespace LoadStackOverflowData
 {
-    internal class Post
+    internal class post
     {
-        public int ID { get; set; }
-        public int Score { get; set; }
+        public int id { get; set; }
+        public int score { get; set; }
 
-        public string Title { get; set; }
-        public string Body { get; set; }
-        public string LastEditorDisplayName { get; set; }
-        public string OwnerDisplayName { get; set; }
-        public string PostType { get; set; }
-        public string Tags { get; set; }
+        public string title { get; set; }
+        public string body { get; set; }
+        public string lastEditorDisplayName { get; set; }
+        public string ownerDisplayName { get; set; }
+        public string postType { get; set; }
+        public string[] tags { get; set; }
 
-        public int AnswerCount { get; set; }
-        public int CommentCount { get; set; }
-        public int FavoriteCount { get; set; }
-        public int ViewCount { get; set; }
+        public int answerCount { get; set; }
+        public int commentCount { get; set; }
+        public int favoriteCount { get; set; }
+        public int viewCount { get; set; }
 
-        public DateTime? ClosedDate { get; set; }
-        public DateTime? CommunityOwnedDate { get; set; }
-        public DateTime? CreationDate { get; set; }
-        public DateTime? LastActivityDate { get; set; }
-        public DateTime? LastEditDate { get; set; }
+        public DateTime? closedDate { get; set; }
+        public DateTime? communityOwnedDate { get; set; }
+        public DateTime? creationDate { get; set; }
+        public DateTime? lastActivityDate { get; set; }
+        public DateTime? lastEditDate { get; set; }
     }
 }
 

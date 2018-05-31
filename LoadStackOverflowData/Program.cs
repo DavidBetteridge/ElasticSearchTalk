@@ -7,7 +7,14 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
+
+/*
+ * Things to note:
+ * 
+ * The properties in the post class start with lowercase letters
+ * The Tags value is converted into an array.  e.g  "<c#><javascript>" becomes ["c#","javascript"]
+ * The data is loaded in blocks of 10000 using the direct rest calls
+ */
 
 namespace LoadStackOverflowData
 {
@@ -53,39 +60,39 @@ namespace LoadStackOverflowData
                                                 IsNull([Title],'') as Title,
                                                 [ViewCount]
                                       FROM Posts P
-                                      JOIN [dbo].[PostTypes] PT ON PT.Id = P.PostTypeId
-                                      JOIN [dbo].[Users] U ON U.Id = P.OwnerUserId";
+                                      LEFT JOIN [dbo].[PostTypes] PT ON PT.Id = P.PostTypeId
+                                      LEFT JOIN [dbo].[Users] U ON U.Id = P.OwnerUserId";
 
 
                     using (var dr = cmd.ExecuteReader())
                     {
                         var totalLoaded = 0;
-                        var posts = new List<Post>();
+                        var posts = new List<post>();
                         var sw = new Stopwatch();
                         sw.Start();
 
                         while (dr.Read())
                         {
                             totalLoaded++;
-                            posts.Add(new Post()
+                            posts.Add(new post()
                             {
-                                ID = (int)dr["Id"],
-                                Body = (string)dr["Body"],
-                                Title = (string)dr["Title"],
-                                AnswerCount = (int)dr["AnswerCount"],
-                                CommentCount = (int)dr["CommentCount"],
-                                FavoriteCount = (int)dr["FavoriteCount"],
-                                ViewCount = (int)dr["ViewCount"],
-                                ClosedDate = dr["ClosedDate"] as DateTime?,
-                                CommunityOwnedDate = dr["CommunityOwnedDate"] as DateTime?,
-                                CreationDate = dr["CreationDate"] as DateTime?,
-                                LastActivityDate = dr["LastActivityDate"] as DateTime?,
-                                LastEditDate = dr["LastEditDate"] as DateTime?,
-                                LastEditorDisplayName = dr["LastEditorDisplayName"] as string,
-                                OwnerDisplayName = dr["OwnerDisplayName"] as string,
-                                PostType = dr["PostType"] as string,
-                                Score = (int)dr["Score"] ,
-                                Tags = dr["Tags"] as string
+                                id = (int)dr["Id"],
+                                body = (string)dr["Body"],
+                                title = (string)dr["Title"],
+                                answerCount = (int)dr["AnswerCount"],
+                                commentCount = (int)dr["CommentCount"],
+                                favoriteCount = (int)dr["FavoriteCount"],
+                                viewCount = (int)dr["ViewCount"],
+                                closedDate = dr["ClosedDate"] as DateTime?,
+                                communityOwnedDate = dr["CommunityOwnedDate"] as DateTime?,
+                                creationDate = dr["CreationDate"] as DateTime?,
+                                lastActivityDate = dr["LastActivityDate"] as DateTime?,
+                                lastEditDate = dr["LastEditDate"] as DateTime?,
+                                lastEditorDisplayName = dr["LastEditorDisplayName"] as string,
+                                ownerDisplayName = dr["OwnerDisplayName"] as string,
+                                postType = dr["PostType"] as string,
+                                score = (int)dr["Score"],
+                                tags = CleanTags(dr["Tags"] as string).Split('+')
                             });
 
 
@@ -113,16 +120,18 @@ namespace LoadStackOverflowData
             }
         }
 
-        private static void LoadPosts(List<Post> posts, HttpClient client)
+        private static string CleanTags(string tags) => string.IsNullOrWhiteSpace(tags) ? "" : tags.Replace("><", "+").Replace("<", "").Replace(">", "");
+
+
+        private static void LoadPosts(List<post> posts, HttpClient client)
         {
             var sb = new StringBuilder();
             foreach (var post in posts)
             {
-                sb.AppendLine(@"{ ""create"": { ""_index"": ""stackoverflow"", ""_type"": ""post"", ""_id"": """ + post.ID + @""" }}");
+                sb.AppendLine(@"{ ""create"": { ""_index"": ""stackoverflow"", ""_type"": ""post"", ""_id"": """ + post.id + @""" }}");
 
                 var payload = JsonConvert.SerializeObject(post);
                 sb.AppendLine(payload);
-                //sb.AppendLine(@" {""body"":""" + CleanForJSON(post.Body) + @""",  ""title"":""" + CleanForJSON(post.Title) + @"""} ");
             }
 
             var content = new StringContent(sb.ToString(), Encoding.UTF8, "application/json");

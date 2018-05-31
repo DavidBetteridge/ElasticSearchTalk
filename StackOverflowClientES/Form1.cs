@@ -9,6 +9,7 @@ namespace StackOverflowClient
 {
     public partial class Form1 : Form
     {
+        private const string Event_Log_Source = "Stack Overflow Client (ES)";
         public Form1()
         {
             InitializeComponent();
@@ -35,11 +36,11 @@ namespace StackOverflowClient
 
             var client = new ElasticClient(settings);
 
-             var searchResponse = client.Search<Post>(s => s
+             var searchResponse = client.Search<post>(s => s
                 .Size(int.Parse(numberOfResults))
                 .Query(q => q
                      .Match(m => m
-                        .Field(f => f.Body)
+                        .Field(f => f.body)
                        .Query(searchTerm)
                      )
                 )
@@ -57,7 +58,7 @@ namespace StackOverflowClient
                     Location = new Point(16, top),
                     Size = new Size(panelResults.Width - 32, 30),
                     TabIndex = 0,
-                    Text = Summary(document.Title, document.Body),
+                    Text = Summary(document.title, document.body),
                     Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
                 };
                 if (shaded) lbl.BackColor = Color.LightGray;
@@ -69,6 +70,7 @@ namespace StackOverflowClient
 
             
             this.Text = $"Stack Overflow Client (Elastic Search) - {searchResponse.Documents.Count}results found in {Math.Round(sw.Elapsed.TotalSeconds, 2)}s";
+            EventLog.WriteEntry(Event_Log_Source, $"Search for {searchTerm} found {results}results found in {Math.Round(sw.Elapsed.TotalSeconds, 2)}s.");
         }
 
 
@@ -88,10 +90,28 @@ namespace StackOverflowClient
             }
         }
 
-        private class Post
+        private class post
         {
-            public string Body { get; set; }
-            public string Title { get; set; }
+            public int id { get; set; }
+            public int score { get; set; }
+
+            public string title { get; set; }
+            public string body { get; set; }
+            public string lastEditorDisplayName { get; set; }
+            public string ownerDisplayName { get; set; }
+            public string postType { get; set; }
+            public string[] tags { get; set; }
+
+            public int answerCount { get; set; }
+            public int commentCount { get; set; }
+            public int favoriteCount { get; set; }
+            public int viewCount { get; set; }
+
+            public DateTime? closedDate { get; set; }
+            public DateTime? communityOwnedDate { get; set; }
+            public DateTime? creationDate { get; set; }
+            public DateTime? lastActivityDate { get; set; }
+            public DateTime? lastEditDate { get; set; }
         }
     }
 

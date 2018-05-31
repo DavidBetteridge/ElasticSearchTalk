@@ -22,7 +22,7 @@ namespace ElasticSearchRESTDemo
             SetupMenus();
 
             _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:9200");
+            _client.BaseAddress = new Uri("http://ipv4.fiddler:9200");
             _client.DefaultRequestHeaders
                    .Accept
                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));

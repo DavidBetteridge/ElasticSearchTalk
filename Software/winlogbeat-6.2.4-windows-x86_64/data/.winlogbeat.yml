@@ -1,0 +1,8 @@
+update_time: 2018-05-29T20:02:48.8410772Z
+event_logs:
+- name: Application
+  record_number: 194906
+  timestamp: 2018-05-29T19:44:58.4208331Z
+- name: System
+  record_number: 72037
+  timestamp: 2018-05-29T19:44:59.678055Z

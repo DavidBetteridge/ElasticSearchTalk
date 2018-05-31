@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StackOverflowClient
 {
     public partial class Form1 : Form
     {
+        private const string Event_Log_Source = "Stack Overflow Client (SQL)";
+
         public Form1()
         {
             InitializeComponent();
@@ -88,7 +85,7 @@ namespace StackOverflowClient
                     sw.Stop();
                     this.Text = $"Stack Overflow Client - {results}results found in {Math.Round(sw.Elapsed.TotalSeconds,2)}s";
 
-
+                    EventLog.WriteEntry(Event_Log_Source, $"Search for {searchTerm} found {results}results found in {Math.Round(sw.Elapsed.TotalSeconds, 2)}s.");
                 }
 
 
