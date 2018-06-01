@@ -82,5 +82,8 @@
   <ItemGroup>
     <None Include="Stack-Overflow-Logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Demo SQL.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

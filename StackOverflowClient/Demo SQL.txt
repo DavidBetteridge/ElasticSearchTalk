@@ -1,0 +1,31 @@
+﻿use [StackOverflow2010]
+go
+
+
+select Name from sys.tables
+
+
+-- Table structure
+select top 100 * from Posts
+
+
+-- How many rows
+select count(*) from Posts
+
+
+-- Have to resort
+select rowcnt from sysindexes where OBJECT_NAME(id) = 'Posts' and indid=1
+
+
+
+--Estimated plan
+select top 10 *
+  from dbo.Posts
+  where LastEditorDisplayName = 'David'
+
+
+select top 10 *
+  from dbo.Posts P
+ where lower(P.Body) like 'c%'
+
+

@@ -22,7 +22,8 @@ namespace ElasticSearchRESTDemo
             SetupMenus();
 
             _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://ipv4.fiddler:9200");
+            //_client.BaseAddress = new Uri("http://ipv4.fiddler:9200");
+            _client.BaseAddress = new Uri("http://localhost:9200");
             _client.DefaultRequestHeaders
                    .Accept
                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -190,7 +191,12 @@ namespace ElasticSearchRESTDemo
         {
             this.txtURL.Text = demo.URL;
             this.cbMethod.Text = demo.Method;
-            this.txtCommand.Text = PrettyPrintJSON(demo.Content);
+
+            if (demo.URL.Contains("_bulk"))
+                this.txtCommand.Text = demo.Content;
+            else
+                this.txtCommand.Text = PrettyPrintJSON(demo.Content);
+
             this.txtResult.Text = "";
             this.lblTitle.Text = "  Demo - " + demo.Title;
         }
@@ -219,6 +225,9 @@ namespace ElasticSearchRESTDemo
             public string Title { get; set; }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

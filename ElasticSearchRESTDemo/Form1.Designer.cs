@@ -179,10 +179,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::ElasticSearchRESTDemo.Properties.Resources.elastic;
-            this.pictureBox1.Location = new System.Drawing.Point(339, 19);
+            this.pictureBox1.Image = global::ElasticSearchRESTDemo.Properties.Resources.dotnetyork;
+            this.pictureBox1.Location = new System.Drawing.Point(465, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(264, 89);
+            this.pictureBox1.Size = new System.Drawing.Size(138, 114);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
@@ -251,6 +251,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Elastic Search REST Demo";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

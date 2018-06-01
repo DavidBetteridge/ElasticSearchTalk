@@ -87,18 +87,22 @@
     <None Include="elastic.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Demos\Bulk Import.txt">
+    <Content Include="Demos\03. Bulk Import.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Demos\Getting Started.txt">
+    <Content Include="Demos\02. Getting Started.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Demos\Search.txt">
+    <Content Include="Demos\05. Stackover Flow.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Demos\System Demos.txt">
+    <Content Include="Demos\04. Search.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Demos\01. System Demos.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="dotnetyork.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

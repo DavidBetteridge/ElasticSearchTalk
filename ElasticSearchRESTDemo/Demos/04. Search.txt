@@ -1,0 +1,56 @@
+﻿All
+GET	/_search
+
+Single Index
+GET /meetups/_search
+
+Single Index and Type
+GET /meetups/dotnetyork/_search
+
+Match Search
+POST /meetups/_search
+{
+    "query" : {
+        "match" : { "speakers": "Kevin"} 
+    }
+}
+
+Match Search (with and)
+POST /meetups/_search
+{
+  "query": {
+    "match": {
+      "speakers": {
+"query" : "Kevin Betteridge",
+"operator" : "and"
+    }
+    }
+  }
+}
+
+Term Search (no results)
+POST /meetups/_search
+{
+    "query" : {
+        "term" : { "speakers": "Kevin Smith"} 
+    }
+}
+
+Term Search (one result)
+POST /meetups/_search
+{ 
+	"query" : {
+        "term" : { "_id": "dec2017"} 
+    }
+}
+
+View Mapping (keyword)
+GET /meetups/_mapping
+
+Term Search (fixed)
+POST /meetups/_search
+{
+    "query" : {
+        "term" : { "speakers.keyword": "Kevin Smith"} 
+    }
+}

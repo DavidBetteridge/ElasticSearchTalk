@@ -23,7 +23,7 @@ GET /meetups/dotnetyork/july2018
 Delete Document
 DELETE /meetups/dotnetyork/july2018
 
-Different Meetup
+Different Type
 PUT /meetups/yorkcodedojo/june2018
 {
 	"title": "Bit Coin Mining",
@@ -36,3 +36,9 @@ PUT /dojo_meetups/yorkcodedojo/june2018
 	"title": "Bit Coin Mining",
 	"date":  "Wednesday, June 13, 2018"
 }
+
+Delete Meetups
+DELETE /meetups
+
+Delete dojo_meetups
+DELETE /dojo_meetups

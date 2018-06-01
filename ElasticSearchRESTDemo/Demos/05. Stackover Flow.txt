@@ -1,0 +1,15 @@
+﻿Number loaded
+GET /stackoverflow/_stats
+
+Template
+GET /stackoverflow/_mapping
+
+Stackoverflow
+POST /stackoverflow/_search
+{
+  "query": {
+    "match": {
+      "body": "Unicorn"
+    }
+  }
+}
