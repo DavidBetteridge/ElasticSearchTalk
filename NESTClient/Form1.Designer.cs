@@ -34,19 +34,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panelResults = new System.Windows.Forms.Panel();
             this.scintilla = new ScintillaNET.Scintilla();
+            this.cmdSimple = new System.Windows.Forms.Button();
+            this.cbCode = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // cmdExecute
             // 
             this.cmdExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdExecute.Location = new System.Drawing.Point(9, 704);
+            this.cmdExecute.Location = new System.Drawing.Point(265, 707);
             this.cmdExecute.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmdExecute.Name = "cmdExecute";
-            this.cmdExecute.Size = new System.Drawing.Size(668, 58);
+            this.cmdExecute.Size = new System.Drawing.Size(429, 58);
             this.cmdExecute.TabIndex = 0;
             this.cmdExecute.Text = "Execute";
             this.cmdExecute.UseVisualStyleBackColor = true;
-            this.cmdExecute.Click += new System.EventHandler(this.button1_Click);
+            this.cmdExecute.Click += new System.EventHandler(this.cmdExecute_Click);
             // 
             // label1
             // 
@@ -103,9 +105,30 @@
             this.scintilla.Name = "scintilla";
             this.scintilla.Size = new System.Drawing.Size(694, 565);
             this.scintilla.TabIndex = 6;
-            this.scintilla.Text = "var searchResponse = client.Search<Post>(s => s\r\n    .Size(10)\r\n    .Query(q => q" +
-    "\r\n         .Match(m => m\r\n            .Field(f => f.Body)\r\n           .Query(\"un" +
+            this.scintilla.Text = "var searchResponse = client.Search<post>(s => s\r\n    .Size(10)\r\n    .Query(q => q" +
+    "\r\n         .Match(m => m\r\n            .Field(f => f.body)\r\n           .Query(\"un" +
     "icorn\")\r\n         )\r\n    )\r\n);\r\n";
+            // 
+            // cmdSimple
+            // 
+            this.cmdSimple.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdSimple.Location = new System.Drawing.Point(7, 707);
+            this.cmdSimple.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.cmdSimple.Name = "cmdSimple";
+            this.cmdSimple.Size = new System.Drawing.Size(238, 58);
+            this.cmdSimple.TabIndex = 7;
+            this.cmdSimple.Text = "Simple";
+            this.cmdSimple.UseVisualStyleBackColor = true;
+            this.cmdSimple.Click += new System.EventHandler(this.cmdSimple_Click);
+            // 
+            // cbCode
+            // 
+            this.cbCode.FormattingEnabled = true;
+            this.cbCode.Location = new System.Drawing.Point(504, 82);
+            this.cbCode.Name = "cbCode";
+            this.cbCode.Size = new System.Drawing.Size(190, 29);
+            this.cbCode.TabIndex = 8;
+            this.cbCode.SelectedIndexChanged += new System.EventHandler(this.cbCode_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -113,6 +136,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1232, 779);
+            this.Controls.Add(this.cbCode);
+            this.Controls.Add(this.cmdSimple);
             this.Controls.Add(this.panelResults);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -123,6 +148,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "Form1";
             this.Text = "Elastic Search - NEST Library";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +162,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panelResults;
         private ScintillaNET.Scintilla scintilla;
+        private System.Windows.Forms.Button cmdSimple;
+        private System.Windows.Forms.ComboBox cbCode;
     }
 }
 

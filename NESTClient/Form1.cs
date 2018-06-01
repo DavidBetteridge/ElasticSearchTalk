@@ -1,5 +1,4 @@
 ﻿using Nest;
-using Newtonsoft.Json;
 using ScintillaNET;
 using System;
 using System.CodeDom.Compiler;
@@ -13,6 +12,112 @@ namespace NESTClient
 {
     public partial class Form1 : Form
     {
+        private const string End_Point = "http://ipv4.fiddler:9200"; //http://localhost:9200
+
+
+        private void cmdSimple_Click(object sender, EventArgs e)
+        {
+            var settings = new ConnectionSettings(new Uri(End_Point))
+                     .DefaultIndex("stackoverflow");
+
+            var client = new ElasticClient(settings);
+
+            var searchResponse = client.Search<post>(s => s
+                .Size(5)
+                .Query(q => q
+                     .Match(m => m
+                        .Field(f => f.body)
+                       .Query("c#")
+                     )
+                )
+            );
+
+            DisplayResults(searchResponse.Documents);
+        }
+
+
+
+
+
+        private void DisplayResults(System.Collections.Generic.IReadOnlyCollection<post> documents)
+        {
+            this.panelResults.Controls.Clear();
+
+            var top = 30;
+            var shaded = false;
+
+            foreach (var document in documents)
+            {
+                var lbl = new Label
+                {
+                    Location = new Point(16, top),
+                    Size = new Size(panelResults.Width - 32, 30),
+                    TabIndex = 0,
+                    Text = Summary(document.title, document.body),
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
+                };
+                if (shaded) lbl.BackColor = Color.LightGray;
+                this.panelResults.Controls.Add(lbl);
+                shaded = !shaded;
+                top += 40;
+            }
+        }
+
+        private string Summary(string title, string body)
+        {
+            title = title.Replace(System.Environment.NewLine, "");
+            body = body.Replace(System.Environment.NewLine, "");
+
+            if (!string.IsNullOrWhiteSpace(title))
+                return title;
+            else
+            {
+                if (body.Length >= 100)
+                    return body.Substring(0, 100) + "...";
+                else
+                    return body;
+            }
+        }
+
+        private void cmdExecute_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var assembly = GenerateAssembly(ScriptInAClass(scintilla.Text));
+
+                var settings = new ConnectionSettings(new Uri(End_Point))
+                        .DefaultIndex("stackoverflow");
+
+                var client = new ElasticClient(settings);
+
+                var searchResponse = Func<ISearchResponse<post>>(assembly, "RunDemo", client);
+
+                var documents = searchResponse.Documents;
+
+                DisplayResults(documents);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Oh dear");
+            }
+        }
+
+        private string ScriptInAClass(string code)
+        {
+            return @"using Nest;
+using System;  
+using NESTClient;
+public class DemoCode
+{
+public ISearchResponse<post> RunDemo(ElasticClient client)
+{
+" + code + @"
+return searchResponse;
+}
+}";
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -44,68 +149,10 @@ namespace NESTClient
             scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private Assembly GenerateAssembly(string sourceCode)
         {
-
-            var assm = Generate(@"using Nest;
-using System;  
-using NESTClient;
-public class DemoCode
-{
-public ISearchResponse<post> RunDemo(ElasticClient client)
-{
-" + scintilla.Text + @"
-return searchResponse;
-}
-}");
-
-            var settings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"))
-                    .DefaultIndex("stackoverflow");
-
-            var client = new ElasticClient(settings);
-
-            var searchResponse = Func<ISearchResponse<post>>(assm, "RunDemo", client);
-
-
-            //var searchResponse = client.Search<Post>(s => s
-            //    .Size(1)
-            //    .Query(q => q
-            //         .Match(m => m
-            //            .Field(f => f.Body)
-            //           .Query("unicorn")
-            //         )
-            //    )
-            //);
-
-            this.panelResults.Controls.Clear();
-            var top = 30;
-            var shaded = false;
-
-            foreach (var document in searchResponse.Documents)
-            {
-                var lbl = new Label
-                {
-                    Location = new Point(16, top),
-                    Size = new Size(panelResults.Width - 32, 30),
-                    TabIndex = 0,
-                    Text = Summary(document.Title, document.Body),
-                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
-                };
-                if (shaded) lbl.BackColor = Color.LightGray;
-                this.panelResults.Controls.Add(lbl);
-                shaded = !shaded;
-                top += 40;
-            }
-
-        }
-
-        private Assembly Generate(string sourceCode)
-        {
-            // Environment.SetEnvironmentVariable("ROSLYN_COMPILER_LOCATION", @"C:\Code\P2P\Features\Web Site\P2P.Web\bin", EnvironmentVariableTarget.Process);
             Environment.SetEnvironmentVariable("ROSLYN_COMPILER_LOCATION", @"C:\Users\david.betteridge\.nuget\packages\microsoft.net.compilers\2.7.0\tools", EnvironmentVariableTarget.Process);
             var _codeDomProvider = new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider();
-            // Environment.SetEnvironmentVariable("ROSLYN_COMPILER_LOCATION", null, EnvironmentVariableTarget.Process);
-
             var _compilerParameters = new CompilerParameters();
             _compilerParameters.ReferencedAssemblies.Add("system.dll");
             _compilerParameters.ReferencedAssemblies.Add("system.xml.dll");
@@ -116,8 +163,6 @@ return searchResponse;
             _compilerParameters.GenerateExecutable = false;
             _compilerParameters.GenerateInMemory = true;
             _compilerParameters.IncludeDebugInformation = true;
-
-
 
             var _compilerResults = _codeDomProvider.CompileAssemblyFromSource(_compilerParameters, sourceCode);
 
@@ -159,57 +204,84 @@ return searchResponse;
                 var firstFrameWithALineNumber = stackTrace.GetFrames().FirstOrDefault(frame => frame.GetFileLineNumber() != 0);
                 if (firstFrameWithALineNumber != null)
                 {
-                    throw new InvalidScriptException(firstFrameWithALineNumber.GetFileLineNumber(), firstFrameWithALineNumber.GetFileColumnNumber(), baseException.Message, "", "GetXML");
+                    throw new Exception(baseException.Message);
+                    //throw new InvalidScriptException(firstFrameWithALineNumber.GetFileLineNumber(), firstFrameWithALineNumber.GetFileColumnNumber(), baseException.Message, "", "GetXML");
                 }
                 else
                 {
-                    throw new InvalidScriptException(0, 0, baseException.Message, "", methodName);
+                    //throw new InvalidScriptException(0, 0, baseException.Message, "", methodName);
+                    throw new Exception(baseException.Message);
                 }
             }
         }
-        private string Summary(string title, string body)
-        {
-            title = title.Replace(System.Environment.NewLine, "");
-            body = body.Replace(System.Environment.NewLine, "");
 
-            if (!string.IsNullOrWhiteSpace(title))
-                return title;
-            else
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            cbCode.Items.Add(new CodeSnippet()
             {
-                if (body.Length >= 100)
-                    return body.Substring(0, 100) + "...";
-                else
-                    return body;
+                Caption = "Match All",
+                Code = @".MatchAll()"
+            });
+
+
+            cbCode.Items.Add(new CodeSnippet()
+            {
+                Caption = "Date Search",
+                Code = @"   .Query(q => q
+                            .DateRange(r => r
+                                .Field(f => f.creationDate)
+                                .GreaterThanOrEquals(new DateTime(2000, 01, 01))
+                                .LessThan(new DateTime(2018, 01, 01))
+                            ))"
+            });
+
+            cbCode.Items.Add(new CodeSnippet()
+            {
+                Caption = "Advanced Search",
+                Code = $@"    .Query(q => q
+        .Bool(b => b
+            .Must(mu => mu
+                .Match(m => m 
+                    .Field(f => f.ownerDisplayName)
+                    .Query(""David"")
+                ), mu => mu
+                .Match(m => m
+                    .Field(f => f.lastEditorDisplayName)
+                    .Query(""David"")
+                )
+            )
+            .Filter(fi => fi
+                 .DateRange(r => r
+                    .Field(f => f.creationDate)
+                    .GreaterThanOrEquals(new DateTime(2000, 01, 01))
+                    .LessThan(new DateTime(2018, 01, 01))
+                )
+            )
+        )
+    )"
+            });
+
+        }
+
+        private void cbCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCode.SelectedItem is CodeSnippet code)
+            {
+                scintilla.Text = @"var searchResponse = client.Search<post>(s => s
+" + code.Code + @"
+);";
             }
         }
     }
 
-    public class post
+
+    class CodeSnippet
     {
-        public int ID { get; set; }
-        public int Score { get; set; }
+        public string Caption { get; set; }
+        public string Code { get; set; }
+        public override string ToString() => Caption;
 
-        public string Title { get; set; }
-
-        [JsonProperty("Body")]
-        public string Body { get; set; }
-
-
-        public string LastEditorDisplayName { get; set; }
-        public string OwnerDisplayName { get; set; }
-        public string PostType { get; set; }
-        public string Tags { get; set; }
-
-        public int AnswerCount { get; set; }
-        public int CommentCount { get; set; }
-        public int FavoriteCount { get; set; }
-        public int ViewCount { get; set; }
-
-        public DateTime? ClosedDate { get; set; }
-        public DateTime? CommunityOwnedDate { get; set; }
-        public DateTime? CreationDate { get; set; }
-        public DateTime? LastActivityDate { get; set; }
-        public DateTime? LastEditDate { get; set; }
     }
+
 
 }

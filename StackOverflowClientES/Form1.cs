@@ -9,6 +9,8 @@ namespace StackOverflowClient
 {
     public partial class Form1 : Form
     {
+        private const string End_Point = "http://localhost:9200";
+
         private const string Event_Log_Source = "Stack Overflow Client (ES)";
         public Form1()
         {
@@ -32,7 +34,7 @@ namespace StackOverflowClient
             var sw = new Stopwatch();
             sw.Start();
 
-            var settings = new ConnectionSettings(new Uri("http://localhost:9200")).DefaultIndex("stackoverflow");
+            var settings = new ConnectionSettings(new Uri(End_Point)).DefaultIndex("stackoverflow");
 
             var client = new ElasticClient(settings);
 
@@ -73,7 +75,6 @@ namespace StackOverflowClient
             EventLog.WriteEntry(Event_Log_Source, $"Search for {searchTerm} found {results}results found in {Math.Round(sw.Elapsed.TotalSeconds, 2)}s.");
         }
 
-
         private string Summary(string title, string body)
         {
             title = title.Replace(System.Environment.NewLine, "");
@@ -90,29 +91,7 @@ namespace StackOverflowClient
             }
         }
 
-        private class post
-        {
-            public int id { get; set; }
-            public int score { get; set; }
 
-            public string title { get; set; }
-            public string body { get; set; }
-            public string lastEditorDisplayName { get; set; }
-            public string ownerDisplayName { get; set; }
-            public string postType { get; set; }
-            public string[] tags { get; set; }
-
-            public int answerCount { get; set; }
-            public int commentCount { get; set; }
-            public int favoriteCount { get; set; }
-            public int viewCount { get; set; }
-
-            public DateTime? closedDate { get; set; }
-            public DateTime? communityOwnedDate { get; set; }
-            public DateTime? creationDate { get; set; }
-            public DateTime? lastActivityDate { get; set; }
-            public DateTime? lastEditDate { get; set; }
-        }
     }
 
 }
