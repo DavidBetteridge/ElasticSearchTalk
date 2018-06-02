@@ -35,6 +35,7 @@
             this.panelResults = new System.Windows.Forms.Panel();
             this.cmdNoOfResults = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmdNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +88,7 @@
             this.panelResults.AutoScroll = true;
             this.panelResults.Location = new System.Drawing.Point(17, 285);
             this.panelResults.Name = "panelResults";
-            this.panelResults.Size = new System.Drawing.Size(1121, 499);
+            this.panelResults.Size = new System.Drawing.Size(1121, 460);
             this.panelResults.TabIndex = 4;
             // 
             // cmdNoOfResults
@@ -106,8 +107,7 @@
             "10000",
             "20000",
             "50000",
-            "100000",
-            });
+            "100000"});
             this.cmdNoOfResults.Location = new System.Drawing.Point(1018, 24);
             this.cmdNoOfResults.Name = "cmdNoOfResults";
             this.cmdNoOfResults.Size = new System.Drawing.Size(121, 38);
@@ -123,11 +123,23 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Max. number of results";
             // 
+            // cmdNext
+            // 
+            this.cmdNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdNext.Location = new System.Drawing.Point(17, 751);
+            this.cmdNext.Name = "cmdNext";
+            this.cmdNext.Size = new System.Drawing.Size(140, 43);
+            this.cmdNext.TabIndex = 7;
+            this.cmdNext.Text = "Scroll";
+            this.cmdNext.UseVisualStyleBackColor = true;
+            this.cmdNext.Click += new System.EventHandler(this.cmdNext_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 796);
+            this.Controls.Add(this.cmdNext);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdNoOfResults);
             this.Controls.Add(this.panelResults);
@@ -154,6 +166,7 @@
         private System.Windows.Forms.Panel panelResults;
         private System.Windows.Forms.ComboBox cmdNoOfResults;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button cmdNext;
     }
 }
 

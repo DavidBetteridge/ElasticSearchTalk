@@ -93,7 +93,10 @@
     <Content Include="Demos\02. Getting Started.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Demos\05. Stackover Flow.txt">
+    <Content Include="Demos\06 Aggregations.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Demos\05. Stackoverflow.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Demos\04. Search.txt">
