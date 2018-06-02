@@ -1,2 +1,2 @@
-# ElasticSearchTalk
-Talk about Elastic Search @ Dot Net York
+# ElasticsearchTalk
+Talk about Elasticsearch @ Dot Net York
