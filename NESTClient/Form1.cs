@@ -12,7 +12,8 @@ namespace NESTClient
 {
     public partial class Form1 : Form
     {
-        private const string End_Point = "http://ipv4.fiddler:9200"; //http://localhost:9200
+        private const string End_Point = "http://localhost:9200";
+        //private const string End_Point = "http://ipv4.fiddler:9200";
 
 
         private void cmdSimple_Click(object sender, EventArgs e)
@@ -151,15 +152,15 @@ return searchResponse;
 
         private Assembly GenerateAssembly(string sourceCode)
         {
-            Environment.SetEnvironmentVariable("ROSLYN_COMPILER_LOCATION", @"C:\Users\david.betteridge\.nuget\packages\microsoft.net.compilers\2.7.0\tools", EnvironmentVariableTarget.Process);
+            Environment.SetEnvironmentVariable("ROSLYN_COMPILER_LOCATION", @"C:\Code\ElasticSearchTalk\packages\Microsoft.Net.Compilers.2.9.0\tools", EnvironmentVariableTarget.Process);
             var _codeDomProvider = new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider();
             var _compilerParameters = new CompilerParameters();
             _compilerParameters.ReferencedAssemblies.Add("system.dll");
             _compilerParameters.ReferencedAssemblies.Add("system.xml.dll");
             _compilerParameters.ReferencedAssemblies.Add("system.core.dll");
             _compilerParameters.ReferencedAssemblies.Add("system.linq.dll");
-            _compilerParameters.ReferencedAssemblies.Add(@"C:\Code\Elastic Search Talk\ElasticSearchRESTDemo\packages\NEST.6.1.0\lib\net46\Nest.dll");
-            _compilerParameters.ReferencedAssemblies.Add(@"C:\Code\Elastic Search Talk\NESTClient\bin\Debug\NESTClient.exe");
+            _compilerParameters.ReferencedAssemblies.Add(@"C:\Code\ElasticSearchTalk\packages\NEST.6.1.0\lib\net46\Nest.dll");
+            _compilerParameters.ReferencedAssemblies.Add(@"C:\Code\ElasticSearchTalk\NESTClient\bin\Debug\NESTClient.exe");
             _compilerParameters.GenerateExecutable = false;
             _compilerParameters.GenerateInMemory = true;
             _compilerParameters.IncludeDebugInformation = true;

@@ -10,8 +10,7 @@ namespace ElasticSearch.Net_Client
     {
         //private const string End_Point = "http://ipv4.fiddler:9200";
         private const string End_Point = "http://localhost:9200";
-
-
+        
         private void cmdInsert_Click(object sender, EventArgs e)
         {
             var settings = new ConnectionConfiguration(new Uri(End_Point))

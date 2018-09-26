@@ -8,3 +8,13 @@ C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.cs
 C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.exe
 C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.pdb
 C:\Code\Elastic Search Talk\StackOverflowClient\obj\Debug\StackOverflowClient.csprojAssemblyReference.cache
+C:\Code\ElasticSearchTalk\StackOverflowClient\bin\Debug\StackOverflowClient.exe.config
+C:\Code\ElasticSearchTalk\StackOverflowClient\bin\Debug\StackOverflowClient.exe
+C:\Code\ElasticSearchTalk\StackOverflowClient\bin\Debug\StackOverflowClient.pdb
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.csprojAssemblyReference.cache
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.Form1.resources
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.Properties.Resources.resources
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.csproj.GenerateResource.cache
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.csproj.CoreCompileInputs.cache
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.exe
+C:\Code\ElasticSearchTalk\StackOverflowClient\obj\Debug\StackOverflowClient.pdb
