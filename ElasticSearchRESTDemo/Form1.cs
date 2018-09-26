@@ -131,7 +131,7 @@ namespace ElasticSearchRESTDemo
                         {
                             while ((line = contents.ReadLine()) != null && !string.IsNullOrWhiteSpace(line))
                             {
-                                payload += line;
+                                payload += line + System.Environment.NewLine;
                             }
                         }
 
