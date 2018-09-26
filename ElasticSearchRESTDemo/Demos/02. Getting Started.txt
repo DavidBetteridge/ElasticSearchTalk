@@ -1,27 +1,27 @@
 ﻿Add Document
-PUT /meetups/dotnetyork/june2018
+PUT /meetups/dotnetsheff/oct2018
 {
-	"title": "Double Bill - Elasticsearch and JavaScript Performance",
-	"speakers":  "David Betteridge and Benjamin Howarth",
-	"date":  "Friday, June 1, 2018"
+	"title": "Double Bill - Elasticsearch and Web Development in F#",
+	"speakers":  "David Betteridge and Ian Russell",
+	"date":  "Tuesday, Oct 2, 2018"
 }
 
 Get Document
-GET /meetups/dotnetyork/june2018
+GET /meetups/dotnetsheff/oct2018
 
 Add Another Document
-PUT /meetups/dotnetyork/july2018
+PUT /meetups/dotnetsheff/aug2018
 {
-	"title": "Why F# is better than C#",
-	"speakers":  "David Betteridge",
-	"date":  "Friday, July 1, 2018"
+	"title": "APIs on the Scale of Decades",
+	"speakers":  "Gary Fleming",
+	"date":  "Auguest 7, 2018"
 }
 
 Get 2nd Document
-GET /meetups/dotnetyork/july2018
+GET /meetups/dotnetsheff/aug2018
 
 Delete Document
-DELETE /meetups/dotnetyork/july2018
+DELETE /meetups/dotnetsheff/aug2018
 
 Different Type
 PUT /meetups/yorkcodedojo/june2018
