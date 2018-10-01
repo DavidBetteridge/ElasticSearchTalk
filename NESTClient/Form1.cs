@@ -6,19 +6,31 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace NESTClient
 {
     public partial class Form1 : Form
     {
-        private const string End_Point = "http://localhost:9200";
-        //private const string End_Point = "http://ipv4.fiddler:9200";
+        static class Endpoints
+        {
+            public const string Direct = "http://localhost:9200";
+            public const string Fiddler = "http://ipv4.fiddler:9200";
+        }
+
+        Uri EndPoint()
+        {
+            if (cbTraceTraffic.Checked)
+                return new Uri(Endpoints.Fiddler);
+            else
+                return new Uri(Endpoints.Direct);
+        }
 
 
         private void cmdSimple_Click(object sender, EventArgs e)
         {
-            var settings = new ConnectionSettings(new Uri(End_Point))
+            var settings = new ConnectionSettings(EndPoint())
                      .DefaultIndex("stackoverflow");
 
             var client = new ElasticClient(settings);
@@ -35,9 +47,6 @@ namespace NESTClient
 
             DisplayResults(searchResponse.Documents);
         }
-
-
-
 
 
         private void DisplayResults(System.Collections.Generic.IReadOnlyCollection<post> documents)
@@ -87,7 +96,7 @@ namespace NESTClient
             {
                 var assembly = GenerateAssembly(ScriptInAClass(scintilla.Text));
 
-                var settings = new ConnectionSettings(new Uri(End_Point))
+                var settings = new ConnectionSettings(EndPoint())
                         .DefaultIndex("stackoverflow");
 
                 var client = new ElasticClient(settings);

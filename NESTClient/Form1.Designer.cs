@@ -36,6 +36,7 @@
             this.scintilla = new ScintillaNET.Scintilla();
             this.cmdSimple = new System.Windows.Forms.Button();
             this.cbCode = new System.Windows.Forms.ComboBox();
+            this.cbTraceTraffic = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cmdExecute
@@ -56,7 +57,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 77);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 30);
+            this.label1.Size = new System.Drawing.Size(167, 37);
             this.label1.TabIndex = 2;
             this.label1.Text = "Source Code";
             // 
@@ -66,7 +67,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(714, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 30);
+            this.label2.Size = new System.Drawing.Size(99, 37);
             this.label2.TabIndex = 3;
             this.label2.Text = "Results";
             // 
@@ -126,16 +127,27 @@
             this.cbCode.FormattingEnabled = true;
             this.cbCode.Location = new System.Drawing.Point(504, 82);
             this.cbCode.Name = "cbCode";
-            this.cbCode.Size = new System.Drawing.Size(190, 29);
+            this.cbCode.Size = new System.Drawing.Size(190, 36);
             this.cbCode.TabIndex = 8;
             this.cbCode.SelectedIndexChanged += new System.EventHandler(this.cbCode_SelectedIndexChanged);
             // 
+            // cbTraceTraffic
+            // 
+            this.cbTraceTraffic.AutoSize = true;
+            this.cbTraceTraffic.Location = new System.Drawing.Point(366, 82);
+            this.cbTraceTraffic.Name = "cbTraceTraffic";
+            this.cbTraceTraffic.Size = new System.Drawing.Size(132, 32);
+            this.cbTraceTraffic.TabIndex = 16;
+            this.cbTraceTraffic.Text = "Use Fiddler";
+            this.cbTraceTraffic.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1232, 779);
+            this.Controls.Add(this.cbTraceTraffic);
             this.Controls.Add(this.cbCode);
             this.Controls.Add(this.cmdSimple);
             this.Controls.Add(this.panelResults);
@@ -164,6 +176,7 @@
         private ScintillaNET.Scintilla scintilla;
         private System.Windows.Forms.Button cmdSimple;
         private System.Windows.Forms.ComboBox cbCode;
+        private System.Windows.Forms.CheckBox cbTraceTraffic;
     }
 }
 

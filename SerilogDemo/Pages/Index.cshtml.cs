@@ -13,7 +13,7 @@ namespace SerilogDemo.Pages
         public void OnGet()
         {
             // A simple log entry
-            _logger.LogInformation("This is message from this great demo");
+            _logger.LogInformation("This is a message from this great demo");
 
             // A structured log entry
             var module = "HighValueAccounts";

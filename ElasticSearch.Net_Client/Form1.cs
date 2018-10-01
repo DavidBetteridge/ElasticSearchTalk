@@ -8,12 +8,23 @@ namespace ElasticSearch.Net_Client
 {
     public partial class Form1 : Form
     {
-        //private const string End_Point = "http://ipv4.fiddler:9200";
-        private const string End_Point = "http://localhost:9200";
-        
+        static class Endpoints
+        {
+            public const string Direct = "http://localhost:9200";
+            public const string Fiddler = "http://ipv4.fiddler:9200";
+        }
+
+        Uri EndPoint()
+        {
+            if (cbTraceTraffic.Checked)
+                return new Uri(Endpoints.Fiddler);
+            else
+                return new Uri(Endpoints.Direct);
+        }
+
         private void cmdInsert_Click(object sender, EventArgs e)
         {
-            var settings = new ConnectionConfiguration(new Uri(End_Point))
+            var settings = new ConnectionConfiguration(EndPoint())
                 .RequestTimeout(TimeSpan.FromMinutes(2));
 
             var lowlevelClient = new ElasticLowLevelClient(settings);
@@ -42,7 +53,7 @@ namespace ElasticSearch.Net_Client
 
         private async void cmdInsertAsync_Click(object sender, EventArgs e)
         {
-            var settings = new ConnectionConfiguration(new Uri(End_Point))
+            var settings = new ConnectionConfiguration(EndPoint())
                 .RequestTimeout(TimeSpan.FromMinutes(2));
 
             var lowlevelClient = new ElasticLowLevelClient(settings);
@@ -60,7 +71,7 @@ namespace ElasticSearch.Net_Client
 
         private void cmdSearch_Click(object sender, EventArgs e)
         {
-            var settings = new ConnectionConfiguration(new Uri(End_Point))
+            var settings = new ConnectionConfiguration(EndPoint())
                 //.ThrowExceptions()
                 .RequestTimeout(TimeSpan.FromMinutes(2));
 

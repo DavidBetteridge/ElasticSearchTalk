@@ -33,12 +33,13 @@
             this.cmdInsertAsync = new System.Windows.Forms.Button();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbTraceTraffic = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdSearch
             // 
-            this.cmdSearch.Location = new System.Drawing.Point(24, 217);
+            this.cmdSearch.Location = new System.Drawing.Point(29, 291);
             this.cmdSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmdSearch.Name = "cmdSearch";
             this.cmdSearch.Size = new System.Drawing.Size(168, 68);
@@ -49,7 +50,7 @@
             // 
             // cmdInsert
             // 
-            this.cmdInsert.Location = new System.Drawing.Point(24, 23);
+            this.cmdInsert.Location = new System.Drawing.Point(29, 97);
             this.cmdInsert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmdInsert.Name = "cmdInsert";
             this.cmdInsert.Size = new System.Drawing.Size(168, 68);
@@ -60,7 +61,7 @@
             // 
             // cmdInsertAsync
             // 
-            this.cmdInsertAsync.Location = new System.Drawing.Point(24, 114);
+            this.cmdInsertAsync.Location = new System.Drawing.Point(29, 188);
             this.cmdInsertAsync.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmdInsertAsync.Name = "cmdInsertAsync";
             this.cmdInsertAsync.Size = new System.Drawing.Size(168, 68);
@@ -74,29 +75,40 @@
             this.txtResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResult.Location = new System.Drawing.Point(227, 23);
+            this.txtResult.Location = new System.Drawing.Point(227, 97);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResult.Size = new System.Drawing.Size(622, 476);
+            this.txtResult.Size = new System.Drawing.Size(722, 564);
             this.txtResult.TabIndex = 13;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::ElasticSearch.Net_Client.Properties.Resources.dotnetyork;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 414);
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::ElasticSearch.Net_Client.Properties.Resources.dotnetsheff;
+            this.pictureBox1.Location = new System.Drawing.Point(694, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(102, 85);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(255, 64);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // cbTraceTraffic
+            // 
+            this.cbTraceTraffic.AutoSize = true;
+            this.cbTraceTraffic.Location = new System.Drawing.Point(29, 396);
+            this.cbTraceTraffic.Name = "cbTraceTraffic";
+            this.cbTraceTraffic.Size = new System.Drawing.Size(132, 32);
+            this.cbTraceTraffic.TabIndex = 15;
+            this.cbTraceTraffic.Text = "Use Fiddler";
+            this.cbTraceTraffic.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(874, 511);
+            this.ClientSize = new System.Drawing.Size(961, 673);
+            this.Controls.Add(this.cbTraceTraffic);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.cmdInsertAsync);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.Button cmdInsertAsync;
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox cbTraceTraffic;
     }
 }
 
